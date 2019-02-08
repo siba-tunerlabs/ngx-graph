@@ -1,0 +1,74 @@
+<div style="width:100%;height:100vh; position: relative;">
+  <ngx-graph style="position : absolute"
+  class="chart-container"
+  [legend]="showLegend"
+  [draggingEnabled]=false
+  [enableZoom]="false"
+  [links]="hierarchialGraph.links"
+  (legendLabelClick)="onLegendLabelClick($event)"
+  [nodes]="hierarchialGraph.nodes"
+  [scheme]="colorScheme"
+  [orientation]="orientation"
+  [curve]="curve"
+  [animations]="animations"
+  >
+  <ng-template #defsTemplate>
+    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+      <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+    </svg:marker>
+  </ng-template>
+
+  <ng-template #nodeTemplate let-node>
+    <svg:g class="node"
+    id="rocket"
+    class="rocket"
+      ngx-tooltip
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="node.label"
+      >
+      <!-- <svg:circle class="onHoverShow" [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.options.color"  stroke="#3d465a" fill="#262C38" stroke-width="2" rx="10" ry="10" /> -->
+
+      <svg:rect [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.options.color"  stroke="#3d465a" fill="#262C38" stroke-width="2" rx="15" ry="15" /> 
+     
+      <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.height / 2 ">
+      {{node.id}}
+      
+    </svg:text>
+    <!-- <svg _ngcontent-c0=""  (click)="onChange()" viewBox="0 0 5102 5102" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg"><path _ngcontent-c0="" z-index="10"  d="M256 48C141.2 48 48 141.2 48 256s93.2 208 208 208 208-93.2 208-208S370.8 48 256 48zm21 312h-42V235h42v125zm0-166h-42v-42h42v42z"></path></svg> -->
+    
+    </svg:g>
+    
+
+  <svg:g  
+    id="matter"
+    >
+
+    <svg:rect [attr.width]="icon.close.width" [attr.height]="icon.close.height" [attr.fill]="red"
+       stroke="#3d465a" fill="#262C38" stroke-width="2" rx="10" ry="10" /> 
+   
+    <svg:text alignment-baseline="central" [attr.x]="node.width - 5" [attr.y]="node.height" (click)="select(node.id)">
+    +
+  </svg:text>
+  <!-- <svg _ngcontent-c0=""  (click)="onChange()" viewBox="0 0 5102 5102" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg"><path _ngcontent-c0="" z-index="10"  d="M256 48C141.2 48 48 141.2 48 256s93.2 208 208 208 208-93.2 208-208S370.8 48 256 48zm21 312h-42V235h42v125zm0-166h-42v-42h42v42z"></path></svg> -->
+  <svg:text alignment-baseline="central" [attr.x]="node.width - 5" [attr.y]="0" (click)="onChange(node.id)" *ngIf=" !(node.id == 'start')" >
+  X
+</svg:text>
+  </svg:g>
+  
+  </ng-template>
+
+  <ng-template #linkTemplate let-link>
+    <svg:g class="edge">
+      <svg:path
+        class="line"
+        stroke-width="2"
+        marker-end="url(#arrow)" >
+      </svg:path>
+       
+    </svg:g>
+
+  </ng-template>
+
+</ngx-graph>
+</div>

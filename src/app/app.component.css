@@ -1,0 +1,20 @@
+.node{
+    width: 100% !important;
+    background-color: red;
+}
+.absolute{
+    position: absolute;
+
+}
+.onHoverShow{
+visibility: hidden;
+}
+
+.onHoverShow:hover{
+    visibility: visible !important;
+}
+
+#matter {display: none;}
+#matter:hover {display: block;}
+    
+#rocket:hover + #matter {display:block;}
