@@ -15,6 +15,7 @@ export class AppComponent {
   icon = {
     close: "X",
   }
+  orientation;
   hierarchialGraph = {
     nodes: [
       {
